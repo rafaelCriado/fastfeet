@@ -1,9 +1,12 @@
 import { Router } from 'express';
+import SessionController from './app/controllers/SessionController';
+import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 
-routes.get('/teste', (req, res) => {
-  return res.json({ ok: true });
-});
+routes.post('/sessions', SessionController.store);
+
+// Rotas com autenticação
+routes.use(authMiddleware);
 
 export default routes;
